@@ -2880,7 +2880,7 @@ dependencies = [
 
 [[package]]
 name = "libp2p-core"
-version = "0.45.0"
+version = "0.44.0"
 dependencies = [
  "bytes",
  "either",
@@ -3310,7 +3310,7 @@ dependencies = [
 
 [[package]]
 name = "libp2p-quic"
-version = "0.15.0"
+version = "0.14.0"
 dependencies = [
  "bytes",
  "futures",
@@ -3446,7 +3446,7 @@ dependencies = [
 
 [[package]]
 name = "libp2p-swarm"
-version = "0.49.0"
+version = "0.48.0"
 dependencies = [
  "bytes",
  "criterion",
