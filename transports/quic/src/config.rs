@@ -173,6 +173,15 @@ impl From<Config> for QuinnConfig {
             quinn::congestion::BbrConfig::default(),
         ));
         transport.initial_mtu(1350);
+        // On a half-duplex radio every reverse ACK costs a TXOP that steals
+        // forward airtime. Ask the peer to ACK once per ~10 ack-eliciting
+        // packets (default is every other one) so the forward path keeps the
+        // medium; the radio's near-zero clean-link loss makes the slower
+        // feedback safe and a 25 ms cap bounds the added latency.
+        let mut ack_frequency = quinn::AckFrequencyConfig::default();
+        ack_frequency.ack_eliciting_threshold(VarInt::from_u32(10));
+        ack_frequency.max_ack_delay(Some(Duration::from_millis(25)));
+        transport.ack_frequency_config(Some(ack_frequency));
         let transport = Arc::new(transport);
 
         let mut server_config = quinn::ServerConfig::with_crypto(server_tls_config);
