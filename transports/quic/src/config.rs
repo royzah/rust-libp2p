@@ -163,25 +163,6 @@ impl From<Config> for QuinnConfig {
         transport.stream_receive_window(max_stream_data.into());
         transport.receive_window(max_connection_data.into());
         transport.mtu_discovery_config(mtu_discovery_config);
-        // Bulk traffic can ride one QUIC stream over a radio whose clean-link
-        // UDP ceiling (~254 Mbit bench) far exceeds CUBIC's steady-state fill.
-        // BBR paces to the measured bottleneck bandwidth instead of reading
-        // sporadic radio loss as congestion, and starting near the link MTU
-        // skips the slow 1200-byte probe ramp on a 1500-MTU mesh (1350 keeps
-        // margin under a batman-encapsulated path).
-        transport.congestion_controller_factory(Arc::new(
-            quinn::congestion::BbrConfig::default(),
-        ));
-        transport.initial_mtu(1350);
-        // On a half-duplex radio every reverse ACK costs a TXOP that steals
-        // forward airtime. Ask the peer to ACK once per ~10 ack-eliciting
-        // packets (default is every other one) so the forward path keeps the
-        // medium; the radio's near-zero clean-link loss makes the slower
-        // feedback safe and a 25 ms cap bounds the added latency.
-        let mut ack_frequency = quinn::AckFrequencyConfig::default();
-        ack_frequency.ack_eliciting_threshold(VarInt::from_u32(10));
-        ack_frequency.max_ack_delay(Some(Duration::from_millis(25)));
-        transport.ack_frequency_config(Some(ack_frequency));
         let transport = Arc::new(transport);
 
         let mut server_config = quinn::ServerConfig::with_crypto(server_tls_config);

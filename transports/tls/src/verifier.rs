@@ -50,9 +50,8 @@ pub(crate) static PROTOCOL_VERSIONS: &[&SupportedProtocolVersion] = &[&rustls::v
 // By default rustls creates client/server configs with both
 // TLS 1.3 __and__ 1.2 cipher suites. But we don't need 1.2.
 pub(crate) static CIPHERSUITES: &[SupportedCipherSuite] = &[
-    // TLS1.3 suites. AES-GCM first so ring runtime-selects the ARMv8 hardware
-    // AES path for QUIC packet protection on crypto-extension SoCs; software
-    // ChaCha20 stays as the fallback for cores without AES acceleration.
+    // TLS1.3 suites, AES-GCM first: ring picks the ARMv8 hardware-AES path for
+    // QUIC packet protection; ChaCha20 is the fallback where AES is not offloaded.
     TLS13_AES_128_GCM_SHA256,
     TLS13_AES_256_GCM_SHA384,
     TLS13_CHACHA20_POLY1305_SHA256,
