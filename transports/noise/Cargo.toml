@@ -40,6 +40,22 @@ futures_ringbuf = "0.4.0"
 quickcheck = { workspace = true }
 tracing-subscriber = { workspace = true, features = ["env-filter"] }
 libp2p-identity = { workspace = true, features = ["rand"] }
+criterion = { workspace = true }
+hex-literal = { workspace = true }
+# Snow exposed as a dev-dep so integration tests can build seeded resolvers
+# for deterministic vector generation without touching src/.
+# Needs use-chacha20poly1305 + use-sha2 so DefaultResolver can handle the full
+# Noise_XXhfs_25519+ML-KEM-768_ChaChaPoly_SHA256 parameter string.
+snow = { version = "0.10", features = ["default-resolver", "use-ml-kem", "use-curve25519", "use-chacha20poly1305", "use-sha2"], default-features = false }
+
+[[bench]]
+name = "noise_hfs"
+harness = false
+required-features = ["mlkem-hfs"]
+
+[[example]]
+name = "noise_hfs_listener"
+required-features = ["mlkem-hfs"]
 
 # Passing arguments to the docsrs builder in order to properly document cfg's.
 # More information: https://docs.rs/about/builds#cross-compiling

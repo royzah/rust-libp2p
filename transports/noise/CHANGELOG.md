@@ -1,3 +1,20 @@
+## Unreleased
+
+### Added
+
+- Cross-language interop listener example (`examples/noise_hfs_listener.rs`) for testing
+  `Noise_XXhfs_25519+ML-KEM-768_ChaChaPoly_SHA256` against Python (py-libp2p PR #1310)
+  and JavaScript (js-libp2p-noise PR #665) implementations.
+
+- Deterministic test vectors for the hybrid XXhfs handshake (`tests/interop_hfs.rs`).
+  Uses a seeded `CryptoResolver` to pin ephemeral keys and verify the handshake hash
+  is stable across runs. Provides cross-language KDF mixing order evidence for
+  `libp2p/specs#723`.
+
+- Criterion benchmarks (`benches/noise_hfs.rs`) comparing classical `Noise_XX` vs
+  hybrid `Noise_XXhfs_25519+ML-KEM-768` handshake latency and post-handshake
+  transport throughput. Expected overhead: ~2–5ms per handshake on modern hardware.
+
 ## 0.47.0
 
 - Add an additive, off-by-default `mlkem-hfs` feature: a hybrid post-quantum

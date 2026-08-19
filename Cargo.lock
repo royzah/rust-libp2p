@@ -1383,7 +1383,7 @@ dependencies = [
  "rustls",
  "sec1",
  "sha1",
- "sha2",
+ "sha2 0.10.8",
  "thiserror 1.0.69",
  "tokio",
  "webrtc-util",
@@ -1436,7 +1436,7 @@ dependencies = [
  "curve25519-dalek",
  "ed25519",
  "serde",
- "sha2",
+ "sha2 0.10.8",
  "subtle",
  "zeroize",
 ]
@@ -2837,7 +2837,7 @@ dependencies = [
  "ecdsa",
  "elliptic-curve",
  "once_cell",
- "sha2",
+ "sha2 0.10.8",
  "signature",
 ]
 
@@ -3141,7 +3141,7 @@ dependencies = [
  "rand 0.8.6",
  "regex",
  "serde",
- "sha2",
+ "sha2 0.10.8",
  "tokio",
  "tracing",
  "tracing-subscriber",
@@ -3191,7 +3191,7 @@ dependencies = [
  "sec1",
  "serde",
  "serde_json",
- "sha2",
+ "sha2 0.10.8",
  "thiserror 2.0.18",
  "tracing",
  "zeroize",
@@ -3220,7 +3220,7 @@ dependencies = [
  "quickcheck-ext",
  "rand 0.8.6",
  "serde",
- "sha2",
+ "sha2 0.10.8",
  "smallvec",
  "thiserror 2.0.18",
  "tokio",
@@ -3325,8 +3325,10 @@ version = "0.47.0"
 dependencies = [
  "asynchronous-codec",
  "bytes",
+ "criterion 0.5.1",
  "futures",
  "futures_ringbuf",
+ "hex-literal 0.4.1",
  "libp2p-core",
  "libp2p-identity",
  "multiaddr",
@@ -3731,7 +3733,7 @@ dependencies = [
  "prost-codec",
  "rand 0.8.6",
  "serde",
- "sha2",
+ "sha2 0.10.8",
  "tinytemplate",
  "tracing",
 ]
@@ -4608,7 +4610,7 @@ dependencies = [
  "ecdsa",
  "elliptic-curve",
  "primeorder",
- "sha2",
+ "sha2 0.10.8",
 ]
 
 [[package]]
@@ -4620,7 +4622,7 @@ dependencies = [
  "ecdsa",
  "elliptic-curve",
  "primeorder",
- "sha2",
+ "sha2 0.10.8",
 ]
 
 [[package]]
@@ -5688,7 +5690,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5bcdef0be6fe7f6fa333b1073c949729274b05f123a0ad7efcb8efd878e5c3b1"
 dependencies = [
  "globset",
- "sha2",
+ "sha2 0.10.8",
  "walkdir",
 ]
 
@@ -6071,6 +6073,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "sha2"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "446ba717509524cb3f22f17ecc096f10f4822d76ab5c0b9822c5f9c284e825f4"
+dependencies = [
+ "cfg-if",
+ "cpufeatures 0.3.0",
+ "digest 0.11.3",
+]
+
+[[package]]
 name = "sha3"
 version = "0.10.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6184,10 +6197,12 @@ name = "snow"
 version = "0.10.0"
 source = "git+https://github.com/royzah/snow?branch=feat/ml-kem-hfs#858dc27ca4b847e4eae582b3878f5906fc595e6a"
 dependencies = [
+ "chacha20poly1305",
  "curve25519-dalek",
  "ml-kem",
  "ring",
  "rustc_version",
+ "sha2 0.11.0",
  "subtle",
 ]
 
@@ -7385,7 +7400,7 @@ dependencies = [
  "sdp",
  "serde",
  "serde_json",
- "sha2",
+ "sha2 0.10.8",
  "smol_str",
  "stun",
  "thiserror 1.0.69",
