@@ -3263,6 +3263,7 @@ version = "0.47.0"
 dependencies = [
  "asynchronous-codec",
  "bytes",
+ "criterion",
  "futures",
  "futures_ringbuf",
  "getrandom 0.3.4",
