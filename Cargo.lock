@@ -3000,7 +3000,7 @@ dependencies = [
  "libp2p-identity",
  "libp2p-quic",
  "libp2p-swarm",
- "thiserror 2.0.19",
+ "thiserror 2.0.20",
  "tokio",
  "tracing-subscriber",
  "unsigned-varint",
@@ -6104,7 +6104,7 @@ dependencies = [
 [[package]]
 name = "snow"
 version = "0.10.0"
-source = "git+https://github.com/royzah/snow?branch=feat%2Fml-kem-hfs#858dc27ca4b847e4eae582b3878f5906fc595e6a"
+source = "git+https://github.com/royzah/snow?branch=feat%2Fml-kem-hfs#dc18c06c28fbdeaa6ffae7347e650c805e9b932e"
 dependencies = [
  "aes-gcm",
  "blake2",
